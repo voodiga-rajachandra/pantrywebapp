@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    # depends_on:  # Remove this because 'db' service is not here
+    environment:
+      DB_HOST: 172.31.84.132      # <- change here to your remote DB IP
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: pantrydb
+    volumes:
+      - .:/usr/src/app
+    command: npm start
+
+# Remove or comment out the db service below:
+#  db:
+#    image: mysql:8
+#    ports:
+#      - "3306:3306"
+#    environment:
+#      MYSQL_ROOT_PASSWORD: root
+#      MYSQL_DATABASE: pantrydb
+#    volumes:
+#      - db_data:/var/lib/mysql
+
+#volumes:
+#  db_data:
+
